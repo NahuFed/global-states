@@ -1,6 +1,26 @@
 # 🎯 Trabajo Práctico: Resolviendo Prop Drilling con useContext
 
-Este trabajo práctico te desafía a **refactorizar** una aplicación React que sufre de **prop drilling extremo** y convertirla en una aplicación que use **React Context API** para el manejo de estados globales.
+Este trabajo práctico te desafía a **refactorizar** una aplicación React que sufre de **prop drilling extremo*## 🔧 Estructura Sugerida Final
+
+```
+src/
+├── contexts/
+│   ├── CartContext.jsx
+│   ├── UserContext.jsx
+│   ├── ProductsContext.jsx
+│   └── NotificationContext.jsx
+├── hooks/
+│   ├── useCart.js
+│   ├── useUser.js
+│   ├── useProducts.js
+│   └── useNotification.js
+├── components/
+│   ├── AppProviders.jsx     # 🆕 Centraliza todos los providers
+│   ├── Dashboard.jsx        # Sin props!
+│   ├── ShoppingSection.jsx  # Sin props!
+│   ├── ProductList.jsx      # Usa hooks!
+│   └── Cart.jsx             # Usa hooks!
+└── App.jsx                  # Limpio, solo usa AppProvidersna aplicación que use **React Context API** para el manejo de estados globales.
 
 ## 📋 Situación Actual (El Problema)
 
@@ -71,7 +91,8 @@ npm run dev
 - Crea componentes Provider para cada context
 - Mueve la lógica de estado desde `App.jsx` a los providers
 - Los providers deben contener tanto el estado como las funciones que lo modifican
-- Considera la estructura: `<CartProvider><UserProvider><App /></UserProvider></CartProvider>`
+- **✨ PATRÓN RECOMENDADO**: Crea un componente `AppProviders.jsx` para mantener App.jsx limpio
+- Ejemplo: `<AppProviders><Dashboard /></AppProviders>`
 - Usa el patrón `value={{ state, actions }}`
 
 </details>

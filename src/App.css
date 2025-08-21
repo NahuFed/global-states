@@ -53,6 +53,26 @@
   font-weight: bold;
 }
 
+.clean-organization {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #28a745;
+  margin-top: 1rem;
+}
+
+.clean-organization p {
+  margin: 0;
+  color: #d4edda;
+}
+
+.clean-organization code {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
 .description {
   background-color: #f0f8ff;
   padding: 1rem;

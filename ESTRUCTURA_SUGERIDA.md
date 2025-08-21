@@ -15,12 +15,13 @@ src/
 │   ├── useProducts.js          # Hook para usar ProductsContext
 │   └── useNotification.js      # Hook para usar NotificationContext
 ├── components/                 # Componentes existentes (refactorizados)
+│   ├── AppProviders.jsx        # 🆕 Componente que centraliza providers
 │   ├── Dashboard.jsx           # Sin props, usa hooks
 │   ├── ShoppingSection.jsx     # Sin props, solo layout
 │   ├── ProductList.jsx         # Sin props, usa hooks
 │   ├── Cart.jsx               # Sin props, usa hooks
 │   └── PropDrillingAnalysis.jsx # Mantener para mostrar la mejora
-├── App.jsx                     # Solo providers y estructura
+├── App.jsx                     # Limpio, solo usa AppProviders
 ├── App.css                     # Estilos existentes
 └── main.jsx                    # Sin cambios
 ```
@@ -75,30 +76,49 @@ export function useCart() {
 }
 ```
 
-### 3. App.jsx refactorizado
+### 3. AppProviders.jsx (🆕 PATRÓN RECOMENDADO)
 ```jsx
-import { CartProvider } from './contexts/CartContext'
-import { UserProvider } from './contexts/UserContext'
-// ... más imports
+import { CartProvider } from '../contexts/CartContext'
+import { UserProvider } from '../contexts/UserContext'
+import { ProductsProvider } from '../contexts/ProductsContext'
+import { NotificationProvider } from '../contexts/NotificationContext'
 
-function App() {
+function AppProviders({ children }) {
   return (
     <CartProvider>
       <UserProvider>
         <ProductsProvider>
           <NotificationProvider>
-            <div className="app">
-              {/* Contenido sin props! */}
-            </div>
+            {children}
           </NotificationProvider>
         </ProductsProvider>
       </UserProvider>
     </CartProvider>
   )
 }
+
+export default AppProviders
 ```
 
-### 4. ProductList.jsx refactorizado
+### 4. App.jsx refactorizado (LIMPIO)
+```jsx
+import AppProviders from './components/AppProviders'
+import Dashboard from './components/Dashboard'
+import './App.css'
+
+function App() {
+  return (
+    <AppProviders>
+      <div className="app">
+        <h1>🛒 Tienda Online</h1>
+        <Dashboard /> {/* Sin props! */}
+      </div>
+    </AppProviders>
+  )
+}
+```
+
+### 5. ProductList.jsx refactorizado
 ```jsx
 import { useProducts } from '../hooks/useProducts'
 import { useCart } from '../hooks/useCart'
