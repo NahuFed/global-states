@@ -1,0 +1,424 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.app {
+  font-family: Arial, sans-serif;
+}
+
+.app h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.description {
+  background-color: #f0f8ff;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #0066cc;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.notification {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid #c3e6cb;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Estilos para cada nivel del prop drilling */
+.dashboard {
+  border: 3px solid #ff6b6b;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  background-color: #fff5f5;
+}
+
+.shopping-section {
+  border: 3px solid #4ecdc4;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  background-color: #f0fffe;
+}
+
+.product-list {
+  border: 3px solid #45b7d1;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f0f9ff;
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.cart {
+  border: 3px solid #f39c12;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #fffbf0;
+  flex: 1;
+}
+
+.level-indicator {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.user-info {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.dashboard-stats {
+  display: flex;
+  gap: 2rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.dashboard-stats p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.shopping-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.product-card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product-card h5 {
+  margin-top: 0;
+  color: #333;
+}
+
+.add-to-cart-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.add-to-cart-btn:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.add-to-cart-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.in-cart {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0.5rem 0 0 0;
+}
+
+.cart-items {
+  margin-bottom: 1rem;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quantity-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-btn:hover {
+  background-color: #0056b3;
+}
+
+.remove-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background-color: #c82333;
+}
+
+.cart-summary {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.clear-cart-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.clear-cart-btn:hover {
+  background-color: #5a6268;
+}
+
+.checkout-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  flex: 2;
+}
+
+.checkout-btn:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.checkout-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.empty-cart {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 4px;
+}
+
+/* Estilos para el análisis del prop drilling */
+.prop-drilling-analysis {
+  background-color: #f8f9fa;
+  border: 2px dashed #6c757d;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+}
+
+.prop-drilling-analysis h3 {
+  margin-top: 0;
+  color: #495057;
+  text-align: center;
+}
+
+.drilling-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-item {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  border-left: 4px solid #007bff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.drilling-flow {
+  margin-bottom: 1.5rem;
+}
+
+.drilling-flow h4 {
+  margin-bottom: 1rem;
+  color: #495057;
+}
+
+.flow-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.flow-item.level-1 { border-left: 4px solid #ff6b6b; }
+.flow-item.level-2 { border-left: 4px solid #ffa500; }
+.flow-item.level-3 { border-left: 4px solid #4ecdc4; }
+.flow-item.level-4a { border-left: 4px solid #45b7d1; }
+.flow-item.level-4b { border-left: 4px solid #f39c12; }
+
+.level-label {
+  font-weight: bold;
+  flex: 1;
+}
+
+.arrow {
+  font-size: 1.2em;
+  margin: 0 1rem;
+}
+
+.props-count {
+  background-color: #e9ecef;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.props-used {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.split-arrow {
+  display: flex;
+  gap: 1rem;
+}
+
+.flow-siblings {
+  display: flex;
+  gap: 1rem;
+  margin-left: 2rem;
+}
+
+.flow-siblings .flow-item {
+  flex: 1;
+}
+
+.problems-list {
+  background-color: #fff3cd;
+  padding: 1rem;
+  border-radius: 4px;
+  border-left: 4px solid #ffc107;
+  margin-bottom: 1rem;
+}
+
+.problems-list h4 {
+  margin-top: 0;
+  color: #856404;
+}
+
+.problems-list ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.problems-list li {
+  margin-bottom: 0.5rem;
+  color: #856404;
+}
+
+.solution-preview {
+  background-color: #d1ecf1;
+  padding: 1rem;
+  border-radius: 4px;
+  border-left: 4px solid #17a2b8;
+}
+
+.solution-preview h4 {
+  margin-top: 0;
+  color: #0c5460;
+}
+
+.solution-code {
+  display: block;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  margin-top: 0.5rem;
+  border: 1px solid #dee2e6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .shopping-container {
+    flex-direction: column;
+  }
+  
+  .product-list {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .cart-actions {
+    flex-direction: column;
+  }
+}
