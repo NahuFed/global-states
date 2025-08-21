@@ -1,105 +1,224 @@
-# Ejemplo de Prop Drilling Extremo en React
+# 🎯 Trabajo Práctico: Resolviendo Prop Drilling con useContext
 
-Este proyecto demuestra el **prop drilling** extremo en React, donde el estado debe pasarse a través de múltiples niveles de componentes para llegar a los componentes que realmente lo necesitan.
+Este trabajo práctico te desafía a **refactorizar** una aplicación React que sufre de **prop drilling extremo** y convertirla en una aplicación que use **React Context API** para el manejo de estados globales.
 
-## 🎯 Objetivo
+## 📋 Situación Actual (El Problema)
 
-Mostrar cómo el prop drilling puede volverse problemático y prepararar el terreno para demostrar cómo solucionarlo con **useContext** y estados globales.
+La aplicación funciona perfectamente, pero tiene un serio problema de arquitectura: **prop drilling extremo**. El estado se maneja en el componente `App` y debe pasar por 4 niveles para llegar a los componentes que realmente lo necesitan.
 
-## 📊 Estructura del Prop Drilling
+### 🔍 Análisis del Problema Actual:
 
-### 4 Niveles de Componentes:
+- **8 props** se pasan a través de múltiples niveles
+- **2 componentes intermedios** (Dashboard y ShoppingSection) que solo pasan props sin usarlas
+- **Componentes hermanos** (ProductList y Cart) que necesitan compartir estado
+- **Mantenimiento difícil**: cambiar una prop requiere tocar múltiples archivos
+- **Testing complicado**: no se pueden testear componentes de forma aislada
 
-1. **NIVEL 1: App** 🔴
-   - Maneja TODO el estado global
-   - Estados: `cartItems`, `user`, `products`, `notification`
-   - Funciones: `addToCart`, `removeFromCart`, `updateQuantity`, `getTotalPrice`, `clearCart`
-   - **Pasa 8 props** al siguiente nivel
+## 🎯 Tu Misión
 
-2. **NIVEL 2: Dashboard** 🟠
-   - NO usa ninguna de las props directamente
-   - Solo las pasa al siguiente nivel
-   - **Pasa 8 props** al siguiente nivel
+Refactorizar la aplicación para eliminar el prop drilling usando **React Context API** y **useContext Hook**.
 
-3. **NIVEL 3: ShoppingSection** 🟡
-   - NO usa ninguna de las props directamente
-   - Solo las pasa al siguiente nivel
-   - **Pasa 8 props** divididas entre los componentes hermanos
+### ✅ Objetivos de Aprendizaje
 
-4. **NIVEL 4A: ProductList** 🔵 (Componente hermano)
-   - **FINALMENTE usa**: `products`, `addToCart`, `cartItems`
-   - Necesita comunicarse con su hermano Cart
+Al completar este trabajo práctico, habrás aprendido a:
 
-5. **NIVEL 4B: Cart** 🟢 (Componente hermano)
-   - **FINALMENTE usa**: `cartItems`, `removeFromCart`, `updateQuantity`, `getTotalPrice`, `clearCart`, `user`
-   - Necesita comunicarse con su hermano ProductList
+1. ✅ Identificar problemas de prop drilling en aplicaciones React
+2. ✅ Crear y configurar React Contexts
+3. ✅ Usar el hook `useContext` para acceder al estado global
+4. ✅ Implementar Custom Hooks para lógica de estado
+5. ✅ Separar concerns entre UI y lógica de estado
+6. ✅ Mejorar la arquitectura y mantenibilidad del código
 
-## 🚨 Problemas del Prop Drilling
-
-1. **Mantenimiento**: Cambiar una prop requiere modificar múltiples archivos
-2. **Legibilidad**: Es difícil rastrear dónde se usan realmente las props
-3. **Performance**: Componentes intermedios se re-renderizan innecesariamente
-4. **Escalabilidad**: Agregar nuevos componentes es complicado
-5. **Testing**: Es difícil testear componentes aisladamente
-
-## 🎨 Visualización
-
-Cada nivel tiene un color de borde diferente para visualizar la jerarquía:
-- 🔴 **Nivel 1 (App)**: Rojo - Estado centralizado
-- 🟠 **Nivel 2 (Dashboard)**: Naranja - Solo pasa props
-- 🟡 **Nivel 3 (ShoppingSection)**: Amarillo - Solo pasa props
-- 🔵 **Nivel 4A (ProductList)**: Azul - Usa props
-- 🟢 **Nivel 4B (Cart)**: Verde - Usa props
-
-## 🚀 Cómo ejecutar
+## 🚀 Instrucciones de Inicio
 
 ```bash
+# Clonar o descargar el proyecto
+git clone [url-del-repo]
+cd global-states
+
+# Instalar dependencias
 npm install
+
+# Ejecutar en modo desarrollo
 npm run dev
 ```
 
-## 📝 Funcionalidades
+## 📝 Tareas a Completar
 
-- ✅ Agregar productos al carrito
-- ✅ Modificar cantidades en el carrito
-- ✅ Eliminar productos del carrito
-- ✅ Vaciar carrito completo
-- ✅ Validación de presupuesto
-- ✅ Notificaciones en tiempo real
-- ✅ Estado compartido entre componentes hermanos
+### � Tarea 1: Crear los Contexts
+**Hint**: Necesitarás crear contexts separados para diferentes tipos de estado.
 
-## 🔧 Próximos pasos
+<details>
+<summary>💡 Pistas para la Tarea 1</summary>
 
-Este ejemplo servirá como base para demostrar cómo solucionar el prop drilling usando:
+- Crea un `CartContext` para el estado del carrito
+- Crea un `UserContext` para el estado del usuario  
+- Crea un `ProductsContext` para los productos disponibles
+- Considera crear un `NotificationContext` para las notificaciones
+- Usa `createContext()` de React
+- No olvides exportar los contexts
 
-1. **React Context API** (useContext)
-2. **Custom Hooks**
-3. **Estado global**
-4. **Providers y Consumers**
-
-## 📁 Estructura de archivos
-
-```
-src/
-├── App.jsx              # Nivel 1 - Maneja todo el estado
-├── App.css              # Estilos con colores por nivel
-└── components/
-    ├── Dashboard.jsx    # Nivel 2 - Pasa props
-    ├── ShoppingSection.jsx # Nivel 3 - Pasa props
-    ├── ProductList.jsx  # Nivel 4A - Usa props
-    └── Cart.jsx         # Nivel 4B - Usa props
-```
-
-## 🤔 Preguntas para reflexionar
-
-1. ¿Qué pasaría si necesitáramos agregar un nuevo componente en el nivel 3?
-2. ¿Cómo sería testear el componente `Cart` de forma aislada?
-3. ¿Qué sucede si queremos agregar un nuevo estado?
-4. ¿Cuántas props necesitaríamos pasar si tuviéramos 10 niveles de componentes?
+</details>
 
 ---
 
-**Este ejemplo exagera intencionalmente el prop drilling para fines educativos.**+ Vite
+### 🟠 Tarea 2: Implementar los Providers
+**Hint**: Los providers deben envolver los componentes que necesitan acceso al estado.
+
+<details>
+<summary>💡 Pistas para la Tarea 2</summary>
+
+- Crea componentes Provider para cada context
+- Mueve la lógica de estado desde `App.jsx` a los providers
+- Los providers deben contener tanto el estado como las funciones que lo modifican
+- Considera la estructura: `<CartProvider><UserProvider><App /></UserProvider></CartProvider>`
+- Usa el patrón `value={{ state, actions }}`
+
+</details>
+
+---
+
+### 🟡 Tarea 3: Crear Custom Hooks
+**Hint**: Los custom hooks simplifican el uso de los contexts.
+
+<details>
+<summary>💡 Pistas para la Tarea 3</summary>
+
+- Crea `useCart()`, `useUser()`, `useProducts()`, etc.
+- Los custom hooks deben usar `useContext()` internamente
+- Agrega validación: lanza error si se usan fuera del Provider
+- Ejemplo: `const { cartItems, addToCart } = useCart()`
+- Esto hace el código más limpio y fácil de usar
+
+</details>
+
+---
+
+### � Tarea 4: Refactorizar ProductList
+**Hint**: Este componente debe acceder directamente al estado sin props.
+
+<details>
+<summary>💡 Pistas para la Tarea 4</summary>
+
+- Elimina las props relacionadas con productos y carrito
+- Usa `useProducts()` y `useCart()` directamente
+- El componente ya no depende de props pasadas desde arriba
+- Debería funcionar exactamente igual que antes
+
+</details>
+
+---
+
+### 🟢 Tarea 5: Refactorizar Cart
+**Hint**: Similar a ProductList, debe usar hooks en lugar de props.
+
+<details>
+<summary>💡 Pistas para la Tarea 5</summary>
+
+- Elimina todas las props relacionadas con el carrito y usuario
+- Usa `useCart()`, `useUser()`, y posiblemente `useNotification()`
+- El componente se vuelve independiente de la jerarquía
+- Mantén toda la funcionalidad existente
+
+</details>
+
+---
+
+### 🟣 Tarea 6: Limpiar Componentes Intermedios
+**Hint**: Dashboard y ShoppingSection ya no necesitan pasar props.
+
+<details>
+<summary>� Pistas para la Tarea 6</summary>
+
+- Elimina todas las props de `Dashboard` y `ShoppingSection`
+- Estos componentes pueden mostrar información usando los contexts directamente
+- O simplemente enfocarse en la estructura y layout
+- Mucho más simples y limpios
+
+</details>
+
+---
+
+### ⚪ Tarea 7: Actualizar App.jsx
+**Hint**: App.jsx se convierte en el orquestador de providers.
+
+<details>
+<summary>💡 Pistas para la Tarea 7</summary>
+
+- Mueve toda la lógica de estado a los providers
+- App.jsx solo debe contener la estructura JSX y los providers
+- Posiblemente use algún context para notificaciones
+- Mucho más limpio y enfocado
+
+</details>
+
+## 🏆 Criterios de Evaluación
+
+### ⭐ Básico (6-7)
+- [ ] Eliminar prop drilling básico
+- [ ] Crear al menos un context funcional
+- [ ] Usar useContext en los componentes finales
+
+### ⭐⭐ Bueno (7-8)
+- [ ] Crear múltiples contexts organizados
+- [ ] Implementar custom hooks
+- [ ] Refactorizar todos los componentes
+- [ ] Mantener funcionalidad completa
+
+### ⭐⭐⭐ Excelente (8-10)
+- [ ] Arquitectura limpia y bien organizada
+- [ ] Custom hooks con validación de errores
+- [ ] Separación clara de responsabilidades
+- [ ] Código reutilizable y mantenible
+- [ ] Documentación del nuevo código
+
+## � Estructura Sugerida Final
+
+```
+src/
+├── contexts/
+│   ├── CartContext.jsx
+│   ├── UserContext.jsx
+│   ├── ProductsContext.jsx
+│   └── NotificationContext.jsx
+├── hooks/
+│   ├── useCart.js
+│   ├── useUser.js
+│   ├── useProducts.js
+│   └── useNotification.js
+├── components/
+│   ├── Dashboard.jsx      # Sin props!
+│   ├── ShoppingSection.jsx # Sin props!
+│   ├── ProductList.jsx    # Usa hooks!
+│   └── Cart.jsx           # Usa hooks!
+└── App.jsx                # Solo providers y estructura
+```
+
+## 🚫 Restricciones
+
+- ❌ **NO** uses Redux, Zustand u otras librerías de estado
+- ❌ **NO** cambies la funcionalidad existente
+- ❌ **NO** modifiques los estilos CSS
+- ✅ **SÍ** usa solo React Context API y useContext
+- ✅ **SÍ** mantén toda la funcionalidad actual
+- ✅ **SÍ** mejora la arquitectura del código
+
+## 📚 Recursos Útiles
+
+- [React Context API Documentation](https://react.dev/reference/react/useContext)
+- [Patterns for React Context](https://kentcdodds.com/blog/how-to-use-react-context-effectively)
+- [Custom Hooks Guide](https://react.dev/learn/reusing-logic-with-custom-hooks)
+
+## 🎉 Entrega
+
+1. Haz commits frecuentes mostrando tu progreso
+2. El commit final debe tener el mensaje: `"feat: Refactor prop drilling to use React Context API"`
+3. La aplicación debe funcionar exactamente igual que antes
+4. Pero ahora sin prop drilling! 🚀
+
+---
+
+**¡Buena suerte! Este ejercicio te ayudará a dominar uno de los patrones más importantes en React.** 💪+ Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

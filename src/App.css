@@ -14,6 +14,45 @@
   margin-bottom: 1rem;
 }
 
+/* Estilos para las instrucciones del trabajo práctico */
+.work-instructions {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.work-instructions h2 {
+  margin-top: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.work-instructions p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.drilling-problem {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #ffd700;
+  margin-top: 1rem;
+  font-family: 'Courier New', monospace;
+}
+
+.drilling-problem code {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.drilling-problem small {
+  color: #ffd700;
+  font-weight: bold;
+}
+
 .description {
   background-color: #f0f8ff;
   padding: 1rem;
@@ -396,6 +435,21 @@
   font-size: 0.9em;
   margin-top: 0.5rem;
   border: 1px solid #dee2e6;
+}
+
+/* Estilos para hints de refactorización */
+.refactor-hint {
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.refactor-hint small {
+  color: #856404;
+  font-weight: bold;
 }
 
 /* Responsive design */

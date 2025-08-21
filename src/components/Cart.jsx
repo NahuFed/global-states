@@ -1,11 +1,29 @@
-// NIVEL 4B: Cart - El otro componente hermano que usa las props restantes
+// 🟢 NIVEL 4B: Cart - El otro componente hermano que usa las props restantes
+//
+// 🔴 TODO: Refactorizar este componente para usar useContext:
+//
+// 💡 HINT: function Cart() { // Sin props!
+//   const { cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart } = useCart()
+//   const { user } = useUser()
+//   // ... resto igual
+// }
+//
+// ✅ RESULTADO: El componente se vuelve independiente de la jerarquía
+// ✅ BENEFICIO: Se puede testear de forma aislada
+// ✅ BENEFICIO: Se puede mover a cualquier lugar sin problemas
+
 function Cart({ cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart, user }) {
   return (
     <div className="cart">
       <h4>🛒 Carrito de Compras</h4>
       <p className="level-indicator">
-        📍 NIVEL 4B: Cart - Componente hermano que usa: cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart, user
+        📍 NIVEL 4B: Cart - Componente hermano que FINALMENTE usa: cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart, user ✅
       </p>
+      <div className="refactor-hint">
+        <small>
+          💡 <strong>TU TAREA:</strong> Elimina las props y usa useCart() + useUser()
+        </small>
+      </div>
       
       {cartItems.length === 0 ? (
         <p className="empty-cart">Tu carrito está vacío</p>

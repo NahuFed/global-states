@@ -2,19 +2,33 @@ import { useState } from 'react'
 import './App.css'
 import Dashboard from './components/Dashboard'
 
-// NIVEL 1: App - Aquí manejamos TODOS los estados
+// 🎯 TRABAJO PRÁCTICO: REFACTORIZAR PROP DRILLING CON useContext
+// 
+// Tu misión: Eliminar todo el prop drilling de esta aplicación
+// usando React Context API y useContext Hook
+//
+// 📋 ESTADO ACTUAL: Todo el estado está aquí y se pasa por 4 niveles
+// 🎯 ESTADO OBJETIVO: Los componentes acceden directamente al estado via Context
+//
+// 💡 HINT: Necesitarás crear contexts para:
+// - CartContext (carrito)
+// - UserContext (usuario)
+// - ProductsContext (productos)
+// - NotificationContext (notificaciones)
+
+// NIVEL 1: App - Aquí manejamos TODOS los estados (PROBLEMA!)
 function App() {
-  // Estado del carrito de compras
+  // 🔴 TODO: Mover este estado a CartContext/CartProvider
   const [cartItems, setCartItems] = useState([])
   
-  // Estado del usuario
+  // 🔴 TODO: Mover este estado a UserContext/UserProvider
   const [user, setUser] = useState({
     name: 'Juan Pérez',
     email: 'juan@email.com',
     budget: 1000
   })
   
-  // Estado de productos disponibles
+  // 🔴 TODO: Mover este estado a ProductsContext/ProductsProvider
   const [products] = useState([
     { id: 1, name: 'Laptop', price: 800, stock: 5 },
     { id: 2, name: 'Mouse', price: 25, stock: 10 },
@@ -22,10 +36,11 @@ function App() {
     { id: 4, name: 'Monitor', price: 300, stock: 3 }
   ])
   
-  // Estado para notificaciones
+  // 🔴 TODO: Mover este estado a NotificationContext/NotificationProvider
   const [notification, setNotification] = useState('')
 
-  // Funciones que deben ser pasadas a través de múltiples niveles
+  // 🔴 TODO: Mover estas funciones a CartContext/CartProvider
+  // Funciones que deben ser pasadas a través de múltiples niveles (PROBLEMA!)
   const addToCart = (product) => {
     const existingItem = cartItems.find(item => item.id === product.id)
     if (existingItem) {
@@ -67,19 +82,47 @@ function App() {
     setTimeout(() => setNotification(''), 3000)
   }
 
+  // 🔴 TODO: Después de crear los Providers, esta función debería verse así:
+  // return (
+  //   <CartProvider>
+  //     <UserProvider>
+  //       <ProductsProvider>
+  //         <NotificationProvider>
+  //           <div className="app">
+  //             {/* Contenido sin props! */}
+  //           </div>
+  //         </NotificationProvider>
+  //       </ProductsProvider>
+  //     </UserProvider>
+  //   </CartProvider>
+  // )
+
   return (
     <div className="app">
-      <h1>🛒 Tienda Online - Ejemplo de Prop Drilling</h1>
-      <p className="description">
-        Este ejemplo demuestra prop drilling extremo: el estado se maneja en App 
-        y debe pasar por 4 niveles para llegar a los componentes hermanos que lo necesitan.
-      </p>
+      <h1>🛒 Tienda Online - Trabajo Práctico useContext</h1>
+      <div className="work-instructions">
+        <h2>🎯 Tu Misión: Eliminar el Prop Drilling</h2>
+        <p>
+          <strong>ESTADO ACTUAL:</strong> Esta aplicación funciona, pero sufre de prop drilling extremo. 
+          8 props se pasan a través de 4 niveles de componentes.
+        </p>
+        <p>
+          <strong>TU OBJETIVO:</strong> Refactorizar usando React Context API para que los componentes 
+          accedan directamente al estado sin prop drilling.
+        </p>
+        <div className="drilling-problem">
+          <code>App → Dashboard → ShoppingSection → ProductList/Cart</code>
+          <br/>
+          <small>↑ 8 props viajando por 4 niveles (PROBLEMA)</small>
+        </div>
+      </div>
       
       {notification && (
         <div className="notification">{notification}</div>
       )}
       
-      {/* Pasamos TODAS las props necesarias al siguiente nivel */}
+      {/* 🔴 PROBLEMA: Pasamos TODAS estas props a través de múltiples niveles */}
+      {/* 🔴 TODO: Después de refactorizar, Dashboard no debería recibir props */}
       <Dashboard 
         user={user}
         cartItems={cartItems}
